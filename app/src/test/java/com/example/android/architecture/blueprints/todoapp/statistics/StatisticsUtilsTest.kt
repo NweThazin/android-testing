@@ -1,8 +1,8 @@
 package com.example.android.architecture.blueprints.todoapp.statistics
 
 import com.example.android.architecture.blueprints.todoapp.data.Task
-import junit.framework.TestCase
-import org.junit.Assert.assertEquals
+import org.hamcrest.CoreMatchers.`is`
+import org.junit.Assert.assertThat
 import org.junit.Test
 
 class StatisticsUtilsTest {
@@ -17,8 +17,8 @@ class StatisticsUtilsTest {
         val result = getActiveAndCompletedStats(tasks)
 
         // check the results
-        assertEquals(0f, result.completedTasksPercent)
-        assertEquals(100f, result.activeTasksPercent)
+        assertThat(result.completedTasksPercent, `is`(0f))
+        assertThat(result.activeTasksPercent, `is`(100f))
     }
 
     // one complete test and no active task
@@ -31,8 +31,8 @@ class StatisticsUtilsTest {
         val result = getActiveAndCompletedStats(tasks)
 
         // check the status
-        assertEquals(0f, result.activeTasksPercent)
-        assertEquals(100f, result.completedTasksPercent)
+        assertThat(result.activeTasksPercent, `is`(0f))
+        assertThat(result.completedTasksPercent, `is`(100f))
     }
 
     // two completed tasks and three active tasks
@@ -49,8 +49,8 @@ class StatisticsUtilsTest {
         val result = getActiveAndCompletedStats(tasks)
 
         // check the status
-        assertEquals(40f, result.completedTasksPercent)
-        assertEquals(60f, result.activeTasksPercent)
+        assertThat(result.completedTasksPercent, `is`(40f))
+        assertThat(result.activeTasksPercent, `is`(60f))
     }
 
     // for empty list
@@ -60,8 +60,8 @@ class StatisticsUtilsTest {
 
         val result = getActiveAndCompletedStats(tasks)
 
-        assertEquals(0f, result.activeTasksPercent)
-        assertEquals(0f, result.completedTasksPercent)
+        assertThat(result.activeTasksPercent, `is`(0f))
+        assertThat(result.completedTasksPercent, `is`(0f))
     }
 
     // for empty list
@@ -71,8 +71,8 @@ class StatisticsUtilsTest {
 
         val result = getActiveAndCompletedStats(tasks)
 
-        assertEquals(0f, result.activeTasksPercent)
-        assertEquals(0f, result.completedTasksPercent)
+        assertThat(result.activeTasksPercent, `is`(0f))
+        assertThat(result.completedTasksPercent, `is`(0f))
     }
 
 
