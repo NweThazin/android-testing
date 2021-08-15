@@ -75,4 +75,8 @@ class FakeTestRepository : TasksRepository {
     override suspend fun deleteAllTasks() {
         TODO("Not yet implemented")
     }
+
+    override suspend fun deleteTask(taskId: String) {
+        TODO("Not yet implemented")
+    }
 }
