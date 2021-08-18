@@ -56,6 +56,30 @@ class TaskDetailFragmentTest {
         onView(withId(R.id.task_detail_complete_checkbox)).check(matches(not(isChecked())))
     }
 
+    @Test
+    fun completedTaskDetails_DisplayedInUi() = runBlockingTest {
+        // GIVEN - Add completed task to the DB
+        val activeTask = Task("Completed Task", "AndroidX Rocks", true)
+
+        repository.saveTask(activeTask)
+
+        // WHEN - Details fragment launched to display task
+        val bundle = TaskDetailFragmentArgs(activeTask.id).toBundle()
+        launchFragmentInContainer<TaskDetailFragment>(bundle, R.style.AppTheme)
+
+        // THEN - Task details are displayed on the screen
+        // make sure that the title/description are both shown and correct
+        Thread.sleep(2000)
+
+        onView(withId(R.id.task_detail_title_text)).check(matches(isDisplayed()))
+        onView(withId(R.id.task_detail_title_text)).check(matches(withText("Completed Task")))
+
+        onView(withId(R.id.task_detail_description_text)).check(matches(isDisplayed()))
+        onView(withId(R.id.task_detail_description_text)).check(matches(withText("AndroidX Rocks")))
+
+        onView(withId(R.id.task_detail_complete_checkbox)).check(matches(isDisplayed()))
+        onView(withId(R.id.task_detail_complete_checkbox)).check(matches(isChecked()))
+    }
 
     @After
     fun cleanupDB() = runBlockingTest {
