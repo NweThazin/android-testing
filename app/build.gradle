@@ -83,6 +83,7 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$androidXTestExtKotlinRunnerVersion"
     androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$espressoVersion"
 
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
