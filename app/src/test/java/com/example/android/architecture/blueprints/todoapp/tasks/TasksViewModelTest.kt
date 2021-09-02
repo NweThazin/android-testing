@@ -4,6 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.android.architecture.blueprints.todoapp.Event
+import com.example.android.architecture.blueprints.todoapp.MainCoroutineRule
 import com.example.android.architecture.blueprints.todoapp.R
 import com.example.android.architecture.blueprints.todoapp.data.Task
 import com.example.android.architecture.blueprints.todoapp.data.source.FakeTestRepository
@@ -27,7 +28,8 @@ import org.robolectric.annotation.Config
 class TasksViewModelTest {
 
     @ExperimentalCoroutinesApi
-    val testDispatcher: TestCoroutineDispatcher = TestCoroutineDispatcher()
+    @get:Rule
+    var mainCoroutineRule = MainCoroutineRule()
 
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
@@ -39,8 +41,6 @@ class TasksViewModelTest {
 
     @Before
     fun setupViewModel() {
-        Dispatchers.setMain(testDispatcher)
-
         tasksRepository = FakeTestRepository()
         val task1 = Task("Title1", "Description1")
         val task2 = Task("Title2", "Description2", true)
@@ -48,13 +48,6 @@ class TasksViewModelTest {
         tasksRepository.addTasks(task1, task2, task3)
 
         tasksViewModel = TasksViewModel(tasksRepository)
-    }
-
-    @ExperimentalCoroutinesApi
-    @After
-    fun tearDownDispatcher() {
-        Dispatchers.resetMain()
-        testDispatcher.cleanupTestCoroutines()
     }
 
     @Test
