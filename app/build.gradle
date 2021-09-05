@@ -37,6 +37,7 @@ android {
     }
     testOptions.unitTests {
         includeAndroidResources = true
+        returnDefaultValues = true
     }
     packagingOptions {
         exclude 'META-INF/*'
@@ -84,6 +85,7 @@ dependencies {
     androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
     androidTestImplementation "androidx.test.espresso:espresso-contrib:$espressoVersion"
+    implementation "androidx.test.espresso:espresso-idling-resource:$espressoVersion"
 
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
